@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 
+//* We surrond the App with Provider with store as the object we created by including ConfigureStore
 const store = ConfigureStore();
 
 class App extends Component {

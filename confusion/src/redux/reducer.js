@@ -10,6 +10,8 @@ export const initialState = {
     leaders: LEADERS
 };
 
+
+//* Added an initial state as in the first call, state is empty
 export const Reducer = (state = initialState, action) => {
     return state;
 };
