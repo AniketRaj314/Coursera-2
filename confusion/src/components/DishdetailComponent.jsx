@@ -23,7 +23,9 @@ class CommentForm extends Component {
     }
 
     handleSubmit = values => {
-        alert(JSON.stringify(values, '', 4));
+        this.toggleModal();
+        console.log(values.rating, values.author, values.comment);
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
     }
 
     render() {
@@ -40,7 +42,7 @@ class CommentForm extends Component {
                             <Label htmlFor="telnum">Rating</Label>
                             <Row className="form-group">
                                 <Col>
-                                    <Control.select model=".contactType" name="contactType"
+                                    <Control.select model=".rating" name="rating"
                                         className="form-control">
                                         <option>1</option>
                                         <option>2</option>
@@ -73,7 +75,7 @@ class CommentForm extends Component {
                             <Label htmlFor="message">Comment</Label>
                             <Row className="form-group">
                                 <Col>
-                                    <Control.textarea model=".message" id="message" name="message"
+                                    <Control.textarea model=".comment" id="comment" name="comment"
                                         rows="6"
                                         className="form-control" />
                                 </Col>
@@ -94,7 +96,7 @@ class CommentForm extends Component {
 
 }
 
-function RenderDishDetail({ dish, comments }) {
+function RenderDishDetail({ dish, comments, addComment, dishId }) {
     if (dish != null) {
         return (
             <div className="row">
@@ -119,7 +121,7 @@ function RenderDishDetail({ dish, comments }) {
                             );
                         })}
                     </ul>
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </div>
             </div>
         );
@@ -146,7 +148,7 @@ const DishDetail = props => {
                 <h3>{props.dish.name}</h3>
                 <hr />
             </div>
-            <RenderDishDetail dish={props.dish} comments={props.comments} />
+            <RenderDishDetail dish={props.dish} comments={props.comments} addComment={props.addComment} dishId={props.dish.id}/>
         </div>
     );
 }
